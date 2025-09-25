@@ -17,6 +17,7 @@ import { SessionModel } from '../database/models/SessionModel';
 import { Argon2PasswordService } from '../crypto/Argon2PasswordService';
 import { JwtTokenService } from '../crypto/JwtTokenService';
 import { NodemailerEmailService } from '../email/NodemailerEmailService';
+import { MockEmailService } from '../email/MockEmailService';
 
 /**
  * Contenedor de Inyección de Dependencias para SIGma
@@ -75,23 +76,30 @@ export class DIContainer {
 
   public get emailService(): EmailService {
     if (!this._emailService) {
-      const host = process.env.SMTP_HOST!;
-      const port = parseInt(process.env.SMTP_PORT || '587', 10);
-      const secure = process.env.SMTP_SECURE === 'true';
-      const user = process.env.SMTP_USER!;
-      const password = process.env.SMTP_PASS!;
-      const fromName = process.env.EMAIL_FROM_NAME || 'SIGma System';
-      const fromAddress = process.env.EMAIL_FROM_ADDRESS || 'noreply@sigma.com';
+      // Usar MockEmailService si no hay credenciales configuradas
+      const user = process.env.SMTP_USER;
+      const password = process.env.SMTP_PASS;
+      
+      if (!user || !password || password === 'TU_APP_PASSWORD_AQUI') {
+        console.log('📧 Usando MockEmailService (credenciales no configuradas)');
+        this._emailService = new MockEmailService();
+      } else {
+        const host = process.env.SMTP_HOST!;
+        const port = parseInt(process.env.SMTP_PORT || '587', 10);
+        const secure = process.env.SMTP_SECURE === 'true';
+        const fromName = process.env.EMAIL_FROM_NAME || 'SIGma System';
+        const fromAddress = process.env.EMAIL_FROM_ADDRESS || 'noreply@sigma.com';
 
-      this._emailService = new NodemailerEmailService(
-        host,
-        port,
-        secure,
-        user,
-        password,
-        fromName,
-        fromAddress
-      );
+        this._emailService = new NodemailerEmailService(
+          host,
+          port,
+          secure,
+          user,
+          password,
+          fromName,
+          fromAddress
+        );
+      }
     }
     return this._emailService;
   }

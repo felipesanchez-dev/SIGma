@@ -63,6 +63,22 @@ export class MongoVerificationCodeRepository implements VerificationCodeReposito
     }
   }
 
+  async findByCode(code: string): Promise<VerificationCode | null> {
+    try {
+      const doc = await this.model.findOne({
+        code: code,
+        isUsed: false,
+        expiresAt: { $gt: new Date() },
+      });
+
+      return doc ? this.documentToEntity(doc) : null;
+    } catch (error) {
+      throw new Error(
+        `Error buscando código de verificación: ${error instanceof Error ? error.message : String(error)}`
+      );
+    }
+  }
+
   async findActiveByEmail(email: Email): Promise<VerificationCode[]> {
     try {
       const docs = await this.model

@@ -101,13 +101,8 @@ export async function authRoutes(
         description: 'Verifica el código enviado por email y activa la cuenta',
         body: {
           type: 'object',
-          required: ['email', 'code'],
+          required: ['code'],
           properties: {
-            email: {
-              type: 'string',
-              format: 'email',
-              description: 'Email del usuario',
-            },
             code: {
               type: 'string',
               pattern: '^\\d{5}$',

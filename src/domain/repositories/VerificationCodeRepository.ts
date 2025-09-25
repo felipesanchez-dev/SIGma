@@ -16,6 +16,11 @@ export interface VerificationCodeRepository {
   findByEmailAndCode(email: Email, code: string): Promise<VerificationCode | null>;
 
   /**
+   * Buscar código de verificación solo por código
+   */
+  findByCode(code: string): Promise<VerificationCode | null>;
+
+  /**
    * Buscar códigos activos por email
    */
   findActiveByEmail(email: Email): Promise<VerificationCode[]>;

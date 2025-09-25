@@ -23,17 +23,7 @@ export class VerifyUserUseCase {
 
   async execute(command: VerifyUserCommand): Promise<VerifyUserResult> {
     try {
-      const email = Email.create(command.email);
-
-      const user = await this.userRepository.findByEmail(email);
-      if (!user) {
-        throw new UserNotFoundError(command.email);
-      }
-
-      const verificationCode = await this.verificationCodeRepository.findByEmailAndCode(
-        email,
-        command.code
-      );
+      const verificationCode = await this.verificationCodeRepository.findByCode(command.code);
 
       if (!verificationCode) {
         throw new VerificationCodeNotFoundError();
@@ -48,6 +38,14 @@ export class VerifyUserUseCase {
 
       if (!verificationCode.isValid()) {
         throw new InvalidVerificationCodeError();
+      }
+
+      // Buscar el usuario por el email del código de verificación
+      const email = Email.create(verificationCode.email.value);
+      const user = await this.userRepository.findByEmail(email);
+      
+      if (!user) {
+        throw new UserNotFoundError(verificationCode.email.value);
       }
 
       verificationCode.use();
@@ -78,7 +76,6 @@ export class VerifyUserUseCase {
 }
 
 export interface VerifyUserCommand {
-  email: string;
   code: string;
 }
 
