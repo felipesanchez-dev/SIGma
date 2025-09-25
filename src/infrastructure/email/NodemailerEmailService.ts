@@ -24,7 +24,7 @@ export class NodemailerEmailService implements EmailService {
     this.fromName = fromName;
     this.fromAddress = fromAddress;
 
-    this.transporter = nodemailer.createTransporter({
+    this.transporter = nodemailer.createTransport({
       host,
       port,
       secure,

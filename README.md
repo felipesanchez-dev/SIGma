@@ -135,25 +135,6 @@ AES_ENCRYPTION_KEY=         # 32 caracteres
 3. Mantener clave pública anterior por periodo de gracia
 4. Migrar gradualmente usuarios activos
 
-## 📋 Roadmap
-
-### Fase 2 (Próxima)
-- [ ] Completar implementación de repositorios
-- [ ] Configurar Fastify con middlewares de seguridad
-- [ ] Implementar rate limiting y CORS
-- [ ] Configurar Redis para sesiones y cache
-
-### Fase 3
-- [ ] Testing completo con cobertura >90%
-- [ ] Documentación OpenAPI/Swagger
-- [ ] Pipeline CI/CD con GitHub Actions
-- [ ] Contenedorización con Docker
-
-### Fase 4
-- [ ] Módulos adicionales (perfiles, organizaciones)
-- [ ] Dashboard administrativo
-- [ ] Métricas avanzadas y alertas
-- [ ] Escalado horizontal con load balancing
 
 ## 👥 Equipo de Desarrollo
 

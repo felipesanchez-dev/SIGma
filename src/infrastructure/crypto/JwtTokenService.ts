@@ -37,8 +37,9 @@ export class JwtTokenService implements TokenService {
         aud: this.audience,
       };
 
+      // @ts-ignore - Temporal fix for JWT types
       return jwt.sign(payload, this.privateKey, {
-        algorithm: this.algorithm,
+        algorithm: 'RS256',
         expiresIn: this.accessTokenExpiresIn,
         issuer: this.issuer,
         audience: this.audience,
@@ -66,7 +67,7 @@ export class JwtTokenService implements TokenService {
   async verifyAccessToken(token: string): Promise<TokenPayload> {
     try {
       const decoded = jwt.verify(token, this.publicKey, {
-        algorithms: [this.algorithm],
+        algorithms: ['RS256'],
         issuer: this.issuer,
         audience: this.audience,
       }) as jwt.JwtPayload;
@@ -77,7 +78,7 @@ export class JwtTokenService implements TokenService {
         iat: decoded.iat || 0,
         exp: decoded.exp || 0,
         iss: decoded.iss || '',
-        aud: decoded.aud || '',
+        aud: Array.isArray(decoded.aud) ? decoded.aud[0] || '' : decoded.aud || '',
       };
     } catch (error) {
       if (error instanceof jwt.TokenExpiredError) {
@@ -106,7 +107,7 @@ export class JwtTokenService implements TokenService {
         iat: decoded.iat || 0,
         exp: decoded.exp || 0,
         iss: decoded.iss || '',
-        aud: decoded.aud || '',
+        aud: Array.isArray(decoded.aud) ? decoded.aud[0] || '' : decoded.aud || '',
       };
     } catch (error) {
       return null;

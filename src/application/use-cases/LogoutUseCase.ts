@@ -1,5 +1,4 @@
 import { SessionRepository } from '@domain/repositories/SessionRepository';
-// import { TokenService } from '@domain/services/TokenService';
 import { SessionNotFoundError, DomainError } from '@shared/errors';
 
 /**
@@ -7,10 +6,7 @@ import { SessionNotFoundError, DomainError } from '@shared/errors';
  * Maneja el cierre de sesión
  */
 export class LogoutUseCase {
-  constructor(
-    private readonly sessionRepository: SessionRepository,
-    // private readonly tokenService: TokenService
-  ) {}
+  constructor(private readonly sessionRepository: SessionRepository) {}
 
   async execute(command: LogoutCommand): Promise<LogoutResult> {
     try {

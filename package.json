@@ -1,7 +1,7 @@
 {
   "name": "sigma-backend",
   "version": "1.0.0",
-  "description": "SIGma (Σ) - Sistema de Gestión Modular con Arquitectura Escalable",
+  "description": "SIGma (Σ) - Sistema de Gestión SG-SST con Arquitectura Modular Escalable",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",

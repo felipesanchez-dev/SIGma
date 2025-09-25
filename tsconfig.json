@@ -3,7 +3,7 @@
     "target": "ES2022",
     "lib": ["ES2022"],
     "module": "commonjs",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "rootDir": "./src",
     "outDir": "./dist",
     "strict": true,

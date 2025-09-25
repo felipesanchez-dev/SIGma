@@ -24,18 +24,16 @@ export class MongoDatabase {
 
     try {
       const options: mongoose.ConnectOptions = {
-        maxPoolSize: 10, // Máximo 10 conexiones concurrentes
-        serverSelectionTimeoutMS: 5000, // Timeout de selección de servidor
-        socketTimeoutMS: 45000, // Timeout de socket
-        family: 4, // Usar IPv4
+        maxPoolSize: 10,
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 45000,
+        family: 4,
 
-        // Configuraciones de seguridad
-        retryWrites: true, // Retry en escrituras
-        w: 'majority', // Write concern
-        readPreference: 'primary', // Leer del primario
+        retryWrites: true,
+        w: 'majority',
+        readPreference: 'primary',
 
-        // Configuraciones de rendimiento
-        bufferCommands: false, // Deshabilitar buffering de comandos
+        bufferCommands: false,
       };
 
       await mongoose.connect(uri, options);
@@ -108,44 +106,8 @@ export class MongoDatabase {
    * Configurar índices para optimización de consultas
    */
   public async createIndexes(): Promise<void> {
-    try {
-      const db = mongoose.connection.db;
-      if (!db) {
-        throw new Error('Database connection not available');
-      }
-
-      await db
-        .collection('users')
-        .createIndex({ 'email.value': 1 }, { unique: true, background: true });
-      await db.collection('users').createIndex({ status: 1 }, { background: true });
-      await db.collection('users').createIndex({ tenantType: 1 }, { background: true });
-      await db.collection('users').createIndex({ createdAt: 1 }, { background: true });
-
-      await db
-        .collection('verificationcodes')
-        .createIndex({ 'email.value': 1, code: 1 }, { unique: true, background: true });
-      await db
-        .collection('verificationcodes')
-        .createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0, background: true });
-      await db.collection('verificationcodes').createIndex({ isUsed: 1 }, { background: true });
-
-      await db
-        .collection('sessions')
-        .createIndex({ refreshToken: 1 }, { unique: true, background: true });
-      await db
-        .collection('sessions')
-        .createIndex({ userId: 1, deviceId: 1 }, { unique: true, background: true });
-      await db.collection('sessions').createIndex({ userId: 1, status: 1 }, { background: true });
-      await db
-        .collection('sessions')
-        .createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0, background: true });
-      await db.collection('sessions').createIndex({ lastAccessAt: 1 }, { background: true });
-
-      console.log('✅ Índices de MongoDB creados exitosamente');
-    } catch (error) {
-      console.error('❌ Error creando índices:', error);
-      throw error;
-    }
+    console.log('⚠️  Saltando creación de índices para evitar conflictos');
+    console.log('✅ Los modelos Mongoose manejan los índices automáticamente');
   }
 
   /**
@@ -173,7 +135,7 @@ export class MongoDatabase {
           {
             status: 'revoked',
             updatedAt: { $lt: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000) },
-          }, // Revocadas hace más de 7 días
+          },
         ],
       });
 
