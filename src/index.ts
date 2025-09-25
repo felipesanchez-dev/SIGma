@@ -28,7 +28,7 @@ async function bootstrap(): Promise<void> {
 
     await server.listen({ port, host });
 
-    console.log(`SIGma Backend ejecutándose en http://localhost:${port}`);
+    console.log(`SIGma Backend ejecutándose en http://${host}:${port}`);
   } catch (error) {
     console.error('Error iniciando la aplicación:', error);
     process.exit(1);
