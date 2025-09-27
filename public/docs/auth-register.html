@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Register - SIGma API</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        h1 { color: #2c3e50; border-bottom: 3px solid #e74c3c; padding-bottom: 15px; }
+        h2 { color: #34495e; margin-top: 30px; }
+        h3 { color: #2980b9; }
+        .method { 
+            background: #28a745; 
+            color: white; 
+            padding: 4px 12px; 
+            border-radius: 4px; 
+            font-weight: bold;
+            font-size: 12px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th { background: #f8f9fa; }
+        .json-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .success { color: #27ae60; }
+        .error { color: #e74c3c; }
+        .info { background: #e3f2fd; padding: 15px; border-left: 4px solid #2196f3; margin: 15px 0; }
+        .warning { background: #fff3e0; padding: 15px; border-left: 4px solid #ff9800; margin: 15px 0; }
+        .nav {
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            margin: -30px -30px 30px -30px;
+            border-radius: 8px 8px 0 0;
+        }
+        .nav a { color: white; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="/index.html">← Volver a la documentación</a>
+        </div>
+
+        <h1>🔐 Endpoint: Register User</h1>
+
+        <h2>📋 Información General</h2>
+        <table>
+            <tr><td><strong>Método</strong></td><td><span class="method">POST</span></td></tr>
+            <tr><td><strong>Ruta</strong></td><td><code>/api/v1/auth/register</code></td></tr>
+            <tr><td><strong>Autenticación</strong></td><td>No requerida</td></tr>
+            <tr><td><strong>Rate Limit</strong></td><td>5 intentos por 15 minutos</td></tr>
+            <tr><td><strong>Versión API</strong></td><td>v1</td></tr>
+        </table>
+
+        <h2>📖 Descripción</h2>
+        <p>Registra un nuevo usuario en el sistema SIGma, ya sea profesional o empresa. Este endpoint crea un usuario en estado <code>pending_verification</code> y envía un código de verificación al email proporcionado.</p>
+
+        <h2>📥 Datos de Entrada (Request Body)</h2>
+        <div class="json-block">
+{
+  "email": "string",
+  "phone": "string", 
+  "name": "string",
+  "country": "string",
+  "city": "string",
+  "password": "string",
+  "tenantType": "professional" | "enterprise"
+}
+        </div>
+
+        <h3>Validaciones de Entrada</h3>
+        <table>
+            <tr>
+                <th>Campo</th>
+                <th>Tipo</th>
+                <th>Requerido</th>
+                <th>Validaciones</th>
+            </tr>
+            <tr>
+                <td>email</td>
+                <td>string</td>
+                <td>✅</td>
+                <td>Formato de email válido<br>Único en el sistema</td>
+            </tr>
+            <tr>
+                <td>phone</td>
+                <td>string</td>
+                <td>✅</td>
+                <td>Formato internacional (+57...)<br>10-15 dígitos</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>string</td>
+                <td>✅</td>
+                <td>2-100 caracteres<br>Solo letras y espacios</td>
+            </tr>
+            <tr>
+                <td>country</td>
+                <td>string</td>
+                <td>✅</td>
+                <td>2-50 caracteres</td>
+            </tr>
+            <tr>
+                <td>city</td>
+                <td>string</td>
+                <td>✅</td>
+                <td>2-50 caracteres</td>
+            </tr>
+            <tr>
+                <td>password</td>
+                <td>string</td>
+                <td>✅</td>
+                <td>Mínimo 8 caracteres<br>Al menos 1 mayúscula, 1 minúscula, 1 número, 1 símbolo</td>
+            </tr>
+            <tr>
+                <td>tenantType</td>
+                <td>enum</td>
+                <td>✅</td>
+                <td>"professional" o "enterprise"</td>
+            </tr>
+        </table>
+
+        <h2>📤 Respuestas</h2>
+
+        <h3 class="success">✅ Registro Exitoso (201 Created)</h3>
+        <div class="json-block">
+{
+  "success": true,
+  "message": "Usuario registrado exitosamente. Se ha enviado un código de verificación a tu email.",
+  "data": {
+    "user": {
+      "id": "64f8a123b456c789d012e345",
+      "email": "juan.perez@gmail.com",
+      "name": "Juan Felipe Reyes Sanchez",
+      "phone": "+573102452542",
+      "country": "Colombia",
+      "city": "Ibague",
+      "status": "pending_verification",
+      "tenantType": "professional",
+      "createdAt": "2025-09-26T02:30:00.000Z"
+    },
+    "verification": {
+      "codeLength": 5,
+      "expiresIn": 900,
+      "sentTo": "juan.perez@gmail.com"
+    }
+  }
+}
+        </div>
+
+        <h3 class="error">❌ Email Ya Existe (409 Conflict)</h3>
+        <div class="json-block">
+{
+  "status": 409,
+  "code": "EMAIL_ALREADY_EXISTS",
+  "message": "Ya existe un usuario registrado con este email",
+  "details": {
+    "email": "juan.perez@gmail.com",
+    "suggestion": "Usa un email diferente o intenta iniciar sesión"
+  }
+}
+        </div>
+
+        <h3 class="error">❌ Datos Inválidos (400 Bad Request)</h3>
+        <div class="json-block">
+{
+  "status": 400,
+  "code": "VALIDATION_ERROR",
+  "message": "Los datos proporcionados no son válidos",
+  "details": {
+    "email": "Formato de email inválido",
+    "password": "La contraseña debe tener al menos 8 caracteres"
+  }
+}
+        </div>
+
+        <h2>🧪 Ejemplo de Uso</h2>
+        <div class="info">
+            <strong>Endpoint:</strong> <code>POST https://sigma-orcin-beta.vercel.app/api/v1/auth/register</code>
+        </div>
+
+        <h3>Curl Example</h3>
+        <div class="json-block">
+curl -X POST https://sigma-orcin-beta.vercel.app/api/v1/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "juansanchegg@gmail.com",
+    "phone": "+573102452542",
+    "name": "Juan Felipe Reyes Sanchez",
+    "country": "Colombia", 
+    "city": "Ibague",
+    "password": "1105461659F@m",
+    "tenantType": "profesional"
+  }'
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Importante:</strong> Después del registro, revisa tu email para obtener el código de verificación de 5 dígitos. El código expira en 15 minutos.
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #dee2e6; color: #6c757d;">
+            <p><strong>SIGma API Documentation</strong> | Versión 1.0.2</p>
+            <p>Última actualización: 26 de septiembre de 2025</p>
+        </div>
+    </div>
+</body>
+</html>

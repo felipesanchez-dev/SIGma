@@ -1,0 +1,24 @@
+{
+  "name": "SIGma Backend API",
+  "version": "1.0.2",
+  "description": "Sistema de Gestión SG-SST - API REST",
+  "baseUrl": "https://sigma-orcin-beta.vercel.app",
+  "documentation": {
+    "swagger": "/docs",
+    "endpoints": {
+      "auth": {
+        "register": "/api/v1/auth/register",
+        "login": "/api/v1/auth/login", 
+        "verify": "/api/v1/auth/verify",
+        "refresh": "/api/v1/auth/refresh",
+        "logout": "/api/v1/auth/logout",
+        "me": "/api/v1/auth/me"
+      },
+      "system": {
+        "health": "/health"
+      }
+    }
+  },
+  "status": "operational",
+  "lastUpdated": "2025-09-26T00:00:00Z"
+}
