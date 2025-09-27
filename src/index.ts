@@ -108,9 +108,6 @@ async function createAppInstance() {
   return appInstance;
 }
 
-// Exportar para Vercel
-export default createAppInstance;
-
 // Solo ejecutar bootstrap si no estamos en Vercel
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
   bootstrap();

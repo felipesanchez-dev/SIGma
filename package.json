@@ -1,8 +1,8 @@
 {
   "name": "sigma-backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SIGma (Σ) - Sistema de Gestión SG-SST con Arquitectura Modular Escalable",
-  "main": "dist/index.js",
+  "main": "api/index.js",
   "scripts": {
     "build": "tsc && tsc-alias",
     "build:vercel": "echo 'Vercel builds automatically'",

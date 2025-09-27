@@ -1,15 +1,28 @@
-import 'dotenv/config';
-import { createServer } from '../src/infrastructure/server/FastifyServer';
-import { MongoDatabase } from '../src/infrastructure/database/MongoDatabase';
-import { createContainer } from '../src/infrastructure/container/DIContainer';
+// Solo importaciones dinámicas para evitar problemas en Vercel
 
 // Cache de la instancia de la app para reutilizar en requests posteriores
 let cachedApp: any = null;
 
 export async function createAppInstance() {
   if (!cachedApp) {
+    console.log('Inicializando aplicación...');
+    
+    // Cargar dotenv de forma dinámica
+    await import('dotenv/config');
+    console.log('Dotenv cargado');
+    
     // Validar variables de entorno mínimas para Vercel
     validateEnvironment();
+    console.log('Variables de entorno validadas');
+
+    // Importaciones dinámicas para evitar problemas de resolución de módulos
+    console.log('Cargando módulos...');
+    const { createServer } = await import('../src/infrastructure/server/FastifyServer');
+    console.log('FastifyServer cargado');
+    const { MongoDatabase } = await import('../src/infrastructure/database/MongoDatabase');
+    console.log('MongoDatabase cargado');
+    const { createContainer } = await import('../src/infrastructure/container/DIContainer');
+    console.log('DIContainer cargado');
 
     const mongoDb = MongoDatabase.getInstance();
     await mongoDb.connect(process.env.MONGODB_URI!);
