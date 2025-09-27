@@ -7,7 +7,7 @@
     "build": "tsc && tsc-alias",
     "build:vercel": "echo 'Vercel builds automatically'",
     "start": "node dist/index.js",
-    "start:vercel": "tsx api/index.ts",
+    "start:vercel": "tsx dist/index.js",
     "dev": "tsx watch src/index.ts",
     "test": "jest",
     "test:watch": "jest --watch",
