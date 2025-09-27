@@ -1,11 +1,11 @@
-import { SessionRepository } from '@domain/repositories/SessionRepository';
-import { TokenService } from '@domain/services/TokenService';
+import { SessionRepository } from '../../domain/repositories/SessionRepository';
+import { TokenService } from '../../domain/services/TokenService';
 import {
   TokenNotFoundError,
   SessionNotFoundError,
   SessionExpiredError,
   DomainError,
-} from '@shared/errors';
+} from '../../shared/errors';
 
 /**
  * Caso de uso: Refresh Token

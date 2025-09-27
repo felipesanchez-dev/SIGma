@@ -1,5 +1,5 @@
-import { PasswordService } from '@domain/services/PasswordService';
-import { Password } from '@domain/entities/Password';
+import { PasswordService } from '../../domain/services/PasswordService';
+import { Password } from '../../domain/entities/Password';
 import * as argon2 from 'argon2';
 
 /**

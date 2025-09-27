@@ -1,5 +1,5 @@
-import { Email } from '@domain/entities/Email';
-import { VerificationCode } from '@domain/entities/VerificationCode';
+import { Email } from '../../domain/entities/Email';
+import { VerificationCode } from '../../domain/entities/VerificationCode';
 
 /**
  * Servicio de dominio para el envío de emails

@@ -1,5 +1,5 @@
-import { ValueObject, PasswordPolicy } from '@shared/types';
-import { InvalidPasswordError } from '@shared/errors';
+import { ValueObject, PasswordPolicy } from '../../shared/types';
+import { InvalidPasswordError } from '../../shared/errors';
 
 /**
  * Value Object para Password

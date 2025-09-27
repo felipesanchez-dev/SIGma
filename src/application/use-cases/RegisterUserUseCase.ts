@@ -1,14 +1,14 @@
-import { Email } from '@domain/entities/Email';
-import { Password } from '@domain/entities/Password';
-import { Phone } from '@domain/entities/Phone';
-import { User } from '@domain/entities/User';
-import { VerificationCode } from '@domain/entities/VerificationCode';
-import { UserRepository } from '@domain/repositories/UserRepository';
-import { VerificationCodeRepository } from '@domain/repositories/VerificationCodeRepository';
-import { PasswordService } from '@domain/services/PasswordService';
-import { EmailService } from '@domain/services/EmailService';
-import { UserAlreadyExistsError, InvalidTenantTypeError, DomainError } from '@shared/errors';
-import { TenantType } from '@shared/types';
+import { Email } from '../../domain/entities/Email';
+import { Password } from '../../domain/entities/Password';
+import { Phone } from '../../domain/entities/Phone';
+import { User } from '../../domain/entities/User';
+import { VerificationCode } from '../../domain/entities/VerificationCode';
+import { UserRepository } from '../../domain/repositories/UserRepository';
+import { VerificationCodeRepository } from '../../domain/repositories/VerificationCodeRepository';
+import { PasswordService } from '../../domain/services/PasswordService';
+import { EmailService } from '../../domain/services/EmailService';
+import { UserAlreadyExistsError, InvalidTenantTypeError, DomainError } from '../../shared/errors';
+import { TenantType } from '../../shared/types';
 const generateUUID = (): string => {
   return Math.random().toString(36).substring(2) + Date.now().toString(36);
 };

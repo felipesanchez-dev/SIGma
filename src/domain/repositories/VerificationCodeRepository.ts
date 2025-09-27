@@ -1,5 +1,5 @@
-import { VerificationCode } from '@domain/entities/VerificationCode';
-import { Email } from '@domain/entities/Email';
+import { VerificationCode } from '../../domain/entities/VerificationCode';
+import { Email } from '../../domain/entities/Email';
 
 /**
  * Repositorio para la entidad VerificationCode

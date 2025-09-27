@@ -1,14 +1,14 @@
-import { Email } from '@domain/entities/Email';
-import { UserRepository } from '@domain/repositories/UserRepository';
-import { VerificationCodeRepository } from '@domain/repositories/VerificationCodeRepository';
-import { EmailService } from '@domain/services/EmailService';
+import { Email } from '../../domain/entities/Email';
+import { UserRepository } from '../../domain/repositories/UserRepository';
+import { VerificationCodeRepository } from '../../domain/repositories/VerificationCodeRepository';
+import { EmailService } from '../../domain/services/EmailService';
 import {
   UserNotFoundError,
   VerificationCodeNotFoundError,
   InvalidVerificationCodeError,
   VerificationCodeExpiredError,
   DomainError,
-} from '@shared/errors';
+} from '../../shared/errors';
 
 /**
  * Caso de uso: Verificar Usuario

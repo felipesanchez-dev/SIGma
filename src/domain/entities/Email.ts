@@ -1,5 +1,5 @@
-import { ValueObject } from '@shared/types';
-import { InvalidEmailError } from '@shared/errors';
+import { ValueObject } from '../../shared/types';
+import { InvalidEmailError } from '../../shared/errors';
 
 /**
  * Value Object para Email

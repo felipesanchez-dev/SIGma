@@ -1,7 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { TokenService } from '@domain/services/TokenService';
-import { DIContainer } from '@infrastructure/container/DIContainer';
-import { TokenNotFoundError, InvalidTokenError, TokenExpiredError } from '@shared/errors';
+import { DIContainer } from '../../infrastructure/container/DIContainer';
+import { TokenNotFoundError, InvalidTokenError, TokenExpiredError } from '../../shared/errors';
 
 /**
  * Middleware de autenticación JWT

@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply, FastifyError } from 'fastify';
-import { DomainError } from '@shared/errors';
+import { DomainError } from '../../shared/errors';
 
 /**
  * Manejador global de errores para Fastify

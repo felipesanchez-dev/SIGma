@@ -1,6 +1,6 @@
-import { EmailService } from '@domain/services/EmailService';
-import { Email } from '@domain/entities/Email';
-import { VerificationCode } from '@domain/entities/VerificationCode';
+import { EmailService } from '../../domain/services/EmailService';
+import { Email } from '../../domain/entities/Email';
+import { VerificationCode } from '../../domain/entities/VerificationCode';
 import * as nodemailer from 'nodemailer';
 
 /**

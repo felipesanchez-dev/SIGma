@@ -1,6 +1,6 @@
-import { UserRepository } from '@domain/repositories/UserRepository';
-import { User } from '@domain/entities/User';
-import { Email } from '@domain/entities/Email';
+import { UserRepository } from '../../../domain/repositories/UserRepository';
+import { User } from '../../../domain/entities/User';
+import { Email } from '../../../domain/entities/Email';
 import { UserModel, UserDocument } from '../models/UserModel';
 
 /**

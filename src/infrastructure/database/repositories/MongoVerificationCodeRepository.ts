@@ -1,6 +1,6 @@
-import { VerificationCodeRepository } from '@domain/repositories/VerificationCodeRepository';
-import { VerificationCode } from '@domain/entities/VerificationCode';
-import { Email } from '@domain/entities/Email';
+import { VerificationCodeRepository } from '../../../domain/repositories/VerificationCodeRepository';
+import { VerificationCode } from '../../../domain/entities/VerificationCode';
+import { Email } from '../../../domain/entities/Email';
 import { Model, Document } from 'mongoose';
 
 interface IVerificationCodeDocument extends Document {

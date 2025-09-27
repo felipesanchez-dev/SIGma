@@ -1,5 +1,5 @@
-import { User } from '@domain/entities/User';
-import { Email } from '@domain/entities/Email';
+import { User } from '../../domain/entities/User';
+import { Email } from '../../domain/entities/Email';
 
 /**
  * Repositorio para la entidad User

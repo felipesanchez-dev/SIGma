@@ -1,4 +1,4 @@
-import { Password } from '@domain/entities/Password';
+import { Password } from '../../domain/entities/Password';
 
 /**
  * Servicio de dominio para el manejo de contraseñas

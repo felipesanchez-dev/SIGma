@@ -1,4 +1,4 @@
-import { BaseEntity, SessionStatus } from '@shared/types';
+import { BaseEntity, SessionStatus } from '../../shared/types';
 
 /**
  * Entidad Session

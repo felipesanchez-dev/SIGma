@@ -1,5 +1,5 @@
-import { SessionRepository } from '@domain/repositories/SessionRepository';
-import { Session, DeviceMeta } from '@domain/entities/Session';
+import { SessionRepository } from '../../../domain/repositories/SessionRepository';
+import { Session, DeviceMeta } from '../../../domain/entities/Session';
 import { Model, Document } from 'mongoose';
 
 interface ISessionDocument extends Document {

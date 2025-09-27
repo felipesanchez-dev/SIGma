@@ -1,9 +1,9 @@
 import { Schema, model, Document } from 'mongoose';
-import { User } from '@domain/entities/User';
-import { Email } from '@domain/entities/Email';
-import { Password } from '@domain/entities/Password';
-import { Phone } from '@domain/entities/Phone';
-import { TenantType, UserStatus } from '@shared/types';
+import { User } from '../../../domain/entities/User';
+import { Email } from '../../../domain/entities/Email';
+import { Password } from '../../../domain/entities/Password';
+import { Phone } from '../../../domain/entities/Phone';
+import { TenantType, UserStatus } from '../../../shared/types';
 
 /**
  * Esquema de MongoDB para la entidad User

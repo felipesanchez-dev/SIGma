@@ -1,18 +1,18 @@
-import { Email } from '@domain/entities/Email';
-import { Password } from '@domain/entities/Password';
-import { Session, DeviceMeta } from '@domain/entities/Session';
-import { UserRepository } from '@domain/repositories/UserRepository';
-import { SessionRepository } from '@domain/repositories/SessionRepository';
-import { PasswordService } from '@domain/services/PasswordService';
-import { TokenService } from '@domain/services/TokenService';
-import { EmailService } from '@domain/services/EmailService';
+import { Email } from '../../domain/entities/Email';
+import { Password } from '../../domain/entities/Password';
+import { Session, DeviceMeta } from '../../domain/entities/Session';
+import { UserRepository } from '../../domain/repositories/UserRepository';
+import { SessionRepository } from '../../domain/repositories/SessionRepository';
+import { PasswordService } from '../../domain/services/PasswordService';
+import { TokenService } from '../../domain/services/TokenService';
+import { EmailService } from '../../domain/services/EmailService';
 import {
   UserNotFoundError,
   InvalidCredentialsError,
   UserNotVerifiedError,
   MaxSessionsExceededError,
   DomainError,
-} from '@shared/errors';
+} from '../../shared/errors';
 
 const generateUUID = (): string => {
   return Math.random().toString(36).substring(2) + Date.now().toString(36);

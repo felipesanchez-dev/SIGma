@@ -1,4 +1,4 @@
-import { ValueObject } from '@shared/types';
+import { ValueObject } from '../../shared/types';
 
 /**
  * Value Object para Teléfono

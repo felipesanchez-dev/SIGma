@@ -1,5 +1,5 @@
-import { SessionRepository } from '@domain/repositories/SessionRepository';
-import { SessionNotFoundError, DomainError } from '@shared/errors';
+import { SessionRepository } from '../../domain/repositories/SessionRepository';
+import { SessionNotFoundError, DomainError } from '../../shared/errors';
 
 /**
  * Caso de uso: Logout

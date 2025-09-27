@@ -1,5 +1,5 @@
-import { TokenService, TokenPayload } from '@domain/services/TokenService';
-import { TokenExpiredError, InvalidTokenError } from '@shared/errors';
+import { TokenService, TokenPayload } from '../../domain/services/TokenService';
+import { TokenExpiredError, InvalidTokenError } from '../../shared/errors';
 import * as jwt from 'jsonwebtoken';
 
 /**

@@ -1,4 +1,4 @@
-import { BaseEntity, TenantType, UserStatus } from '@shared/types';
+import { BaseEntity, TenantType, UserStatus } from '../../shared/types';
 import { Email } from './Email';
 import { Password } from './Password';
 import { Phone } from './Phone';

@@ -1,8 +1,8 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { DIContainer } from '@infrastructure/container/DIContainer';
-import { DomainError } from '@shared/errors';
-import { TenantType } from '@shared/types';
-import { DeviceMeta } from '@domain/entities/Session';
+import { DIContainer } from '../../infrastructure/container/DIContainer';
+import { DomainError } from '../../shared/errors';
+import { TenantType } from '../../shared/types';
+import { DeviceMeta } from '../../domain/entities/Session';
 
 /**
  * Controlador de autenticación

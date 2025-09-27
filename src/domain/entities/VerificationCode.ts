@@ -1,4 +1,4 @@
-import { BaseEntity } from '@shared/types';
+import { BaseEntity } from '../../shared/types';
 import { Email } from './Email';
 
 /**

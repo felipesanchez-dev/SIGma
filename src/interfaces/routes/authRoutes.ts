@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
-import { DIContainer } from '@infrastructure/container/DIContainer';
+import { DIContainer } from '../../infrastructure/container/DIContainer';
 import { authController } from '../controllers/authController';
 
 /**
