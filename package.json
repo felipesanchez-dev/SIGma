@@ -4,8 +4,9 @@
   "description": "SIGma (Σ) - Sistema de Gestión SG-SST con Arquitectura Modular Escalable",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "start": "node dist/index.js",
+    "start:vercel": "tsx api/index.ts",
     "dev": "tsx watch src/index.ts",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -45,6 +46,7 @@
     "nodemailer": "^6.9.7",
     "pino": "^8.16.2",
     "pino-pretty": "^10.2.3",
+    "tsconfig-paths": "^4.2.0",
     "uuid": "^9.0.1",
     "zod": "^3.22.4"
   },
@@ -65,6 +67,7 @@
     "prettier": "^3.0.3",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.1",
+    "tsc-alias": "^1.8.16",
     "tsx": "^4.1.4",
     "typescript": "^5.2.2"
   },
