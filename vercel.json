@@ -1,16 +1,13 @@
 {
-  "version": 2,
   "functions": {
     "api/index.ts": {
       "maxDuration": 30
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/api/index.ts"
+      "source": "/(.*)",
+      "destination": "/api/index.ts"
     }
-  ],
-  "buildCommand": "echo 'No build needed for serverless API'",
-  "outputDirectory": "public"
+  ]
 }

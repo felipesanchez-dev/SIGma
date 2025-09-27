@@ -1,4 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
+import { createAppInstance } from './app';
 
 export default async (req: VercelRequest, res: VercelResponse) => {
   try {
@@ -17,14 +18,11 @@ export default async (req: VercelRequest, res: VercelResponse) => {
       });
     }
 
-    // Importación dinámica para evitar problemas en cold start
-    const { default: createAppInstance } = await import('../src/index');
-    
+    // Crear o reutilizar instancia de la aplicación
     console.log('📦 Creando instancia de aplicación...');
     const app = await createAppInstance();
     
-    console.log('⚡ Preparando aplicación...');
-    await app.ready();
+    console.log('⚡ Aplicación lista');
     
     console.log('🔄 Inyectando request...');
     const response = await app.inject({

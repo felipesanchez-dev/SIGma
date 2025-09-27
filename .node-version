@@ -1,0 +1,2 @@
+# Configuración de Node.js para Vercel
+NODE_VERSION=18.x

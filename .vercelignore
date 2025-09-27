@@ -10,11 +10,11 @@ build/
 .next/
 
 # Environment files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# .env
+# .env.local
+# .env.development.local
+# .env.test.local
+# .env.production.local
 
 # IDE files
 .vscode/
@@ -44,8 +44,6 @@ LOGROS.md
 PROGRESO.md
 tareas.md
 
-# TypeScript config (not needed for runtime)
-tsconfig.json
-
-# Source files (we only need the compiled API)
-src/
+# Keep source files for Vercel TypeScript compilation
+# tsconfig.json is needed for TypeScript compilation
+# src/ is needed for imports
