@@ -91,4 +91,27 @@ function setupGracefulShutdown(server: any, mongoDb: MongoDatabase): void {
   });
 }
 
-bootstrap();
+// Crear instancia de servidor para exportar
+let appInstance: any = null;
+
+async function createAppInstance() {
+  if (!appInstance) {
+    validateEnvironment();
+
+    const mongoDb = MongoDatabase.getInstance();
+    await mongoDb.connect(process.env.MONGODB_URI!);
+    await mongoDb.createIndexes();
+
+    const container = createContainer();
+    appInstance = createServer(container);
+  }
+  return appInstance;
+}
+
+// Exportar para Vercel
+export default createAppInstance;
+
+// Solo ejecutar bootstrap si no estamos en Vercel
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  bootstrap();
+}
