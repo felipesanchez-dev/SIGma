@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createServer } from './infrastructure/server/FastifyServer';
 import { MongoDatabase } from './infrastructure/database/MongoDatabase';
 import { createContainer } from './infrastructure/container/DIContainer';
@@ -110,14 +111,19 @@ async function createAppInstance() {
 }
 
 // Handler para Vercel
-export default async function handler(req: any, res: any) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
+    // Prueba simple primero
+    if (req.url === '/health') {
+      return res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
+    }
+
     const app = await createAppInstance();
     
     // Convertir la request de Vercel a formato Fastify
     const fastifyRequest = {
-      method: req.method,
-      url: req.url,
+      method: req.method as any,
+      url: req.url || '/',
       headers: req.headers,
       body: req.body,
       query: req.query
@@ -131,14 +137,17 @@ export default async function handler(req: any, res: any) {
     
     // Establecer headers
     Object.entries(response.headers).forEach(([key, value]) => {
-      res.setHeader(key, value);
+      if (value !== undefined) {
+        res.setHeader(key, String(value));
+      }
     });
     
     // Enviar la respuesta
-    res.send(response.body);
+    return res.send(response.body);
   } catch (error) {
     console.error('Error en handler de Vercel:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return res.status(500).json({ error: 'Internal server error', message });
   }
 }
 
