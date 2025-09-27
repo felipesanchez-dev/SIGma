@@ -19,7 +19,9 @@
     "docker:dev": "docker-compose -f docker-compose.dev.yml up",
     "docker:down": "docker-compose -f docker-compose.dev.yml down",
     "seed": "tsx scripts/seed.ts",
-    "generate-keys": "tsx scripts/generate-keys.ts"
+    "generate-keys": "tsx scripts/generate-keys.ts",
+    "verify-deployment": "node scripts/verify-deployment.js",
+    "deploy:check": "npm run verify-deployment && npm run build"
   },
   "keywords": [
     "sigma",

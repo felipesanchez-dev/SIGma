@@ -16,13 +16,14 @@ import { authMiddleware } from '../../interfaces/middlewares/authMiddleware';
  */
 export function createServer(container: DIContainer): FastifyInstance {
   const server = fastify({
-    logger: {
+    logger: process.env.NODE_ENV === 'production' ? false : {
       level: process.env.LOG_LEVEL || 'info',
     },
     trustProxy: true,
     bodyLimit: 1048576,
     caseSensitive: true,
     ignoreTrailingSlash: false,
+    disableRequestLogging: process.env.NODE_ENV === 'production',
   });
 
   setupSecurityPlugins(server);
