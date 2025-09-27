@@ -5,47 +5,16 @@
       "src": "api/index.ts",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": [
-          "docs/**",
-          "src/**",
-          "package.json",
-          "tsconfig.json"
-        ]
+        "includeFiles": ["docs/**", "src/**"]
       }
     }
   ],
   "routes": [
     {
-      "src": "/health",
-      "dest": "api/index.ts"
-    },
-    {
-      "src": "/api/health",
-      "dest": "api/index.ts"
-    },
-    {
-      "src": "/api/v1/(.*)",
-      "dest": "api/index.ts"
-    },
-    {
-      "src": "/docs",
-      "dest": "api/index.ts"
-    },
-    {
-      "src": "/docs/(.*)",
-      "dest": "api/index.ts"
-    },
-    {
       "src": "/(.*)",
       "dest": "api/index.ts"
     }
   ],
-  "functions": {
-    "api/index.ts": {
-      "maxDuration": 30,
-      "memory": 512
-    }
-  },
   "env": {
     "NODE_ENV": "production",
     "LOG_LEVEL": "warn"
