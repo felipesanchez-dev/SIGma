@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/index.ts": {
+    "dist/index.ts": {
       "maxDuration": 30
     }
   },
