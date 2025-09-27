@@ -40,16 +40,16 @@ export class MongoDatabase {
       this.isConnected = true;
 
       mongoose.connection.on('connected', () => {
-        console.log('✅ MongoDB conectado exitosamente');
+        console.log('MongoDB conectado exitosamente');
       });
 
       mongoose.connection.on('error', error => {
-        console.error('❌ Error de conexión MongoDB:', error);
+        console.error('Error de conexión MongoDB:', error);
         this.isConnected = false;
       });
 
       mongoose.connection.on('disconnected', () => {
-        console.log('⚠️ MongoDB desconectado');
+        console.log('MongoDB desconectado');
         this.isConnected = false;
       });
 
@@ -58,7 +58,7 @@ export class MongoDatabase {
         process.exit(0);
       });
     } catch (error) {
-      console.error('❌ Error conectando a MongoDB:', error);
+      console.error('Error conectando a MongoDB:', error);
       throw new Error(
         `Error de conexión a MongoDB: ${error instanceof Error ? error.message : String(error)}`
       );
@@ -73,9 +73,9 @@ export class MongoDatabase {
     try {
       await mongoose.connection.close();
       this.isConnected = false;
-      console.log('✅ MongoDB desconectado gracefully');
+      console.log('MongoDB desconectado gracefully');
     } catch (error) {
-      console.error('❌ Error desconectando MongoDB:', error);
+      console.error('Error desconectando MongoDB:', error);
     }
   }
 
@@ -106,8 +106,8 @@ export class MongoDatabase {
    * Configurar índices para optimización de consultas
    */
   public async createIndexes(): Promise<void> {
-    console.log('⚠️  Saltando creación de índices para evitar conflictos');
-    console.log('✅ Los modelos Mongoose manejan los índices automáticamente');
+    console.log('Saltando creación de índices para evitar conflictos');
+    console.log('Los modelos Mongoose manejan los índices automáticamente');
   }
 
   /**
@@ -140,10 +140,10 @@ export class MongoDatabase {
       });
 
       console.log(
-        `🧹 Limpieza completada: ${expiredCodes.deletedCount} códigos y ${expiredSessions.deletedCount} sesiones eliminadas`
+        `Limpieza completada: ${expiredCodes.deletedCount} códigos y ${expiredSessions.deletedCount} sesiones eliminadas`
       );
     } catch (error) {
-      console.error('❌ Error en limpieza de datos:', error);
+      console.error('Error en limpieza de datos:', error);
     }
   }
 }

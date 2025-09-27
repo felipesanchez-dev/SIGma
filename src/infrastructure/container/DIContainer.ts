@@ -79,9 +79,9 @@ export class DIContainer {
       // Usar MockEmailService si no hay credenciales configuradas
       const user = process.env.SMTP_USER;
       const password = process.env.SMTP_PASS;
-      
+
       if (!user || !password || password === 'TU_APP_PASSWORD_AQUI') {
-        console.log('📧 Usando MockEmailService (credenciales no configuradas)');
+        console.log('Usando MockEmailService (credenciales no configuradas)');
         this._emailService = new MockEmailService();
       } else {
         const host = process.env.SMTP_HOST!;
@@ -195,21 +195,21 @@ export class DIContainer {
     try {
       const emailConfigValid = await this.emailService.verifyConfiguration();
       if (!emailConfigValid) {
-        console.warn('⚠️ Configuración de email inválida');
+        console.warn('Configuración de email inválida');
         return false;
       }
 
       const tokenService = this.tokenService as JwtTokenService;
       const tokenConfigValid = tokenService.validateKeys();
       if (!tokenConfigValid) {
-        console.warn('⚠️ Configuración de JWT inválida');
+        console.warn('Configuración de JWT inválida');
         return false;
       }
 
-      console.log('✅ Configuración de servicios verificada');
+      console.log('Configuración de servicios verificada');
       return true;
     } catch (error) {
-      console.error('❌ Error verificando configuración:', error);
+      console.error('Error verificando configuración:', error);
       return false;
     }
   }

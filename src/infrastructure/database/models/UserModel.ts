@@ -220,7 +220,7 @@ UserSchema.pre('save', function (next) {
 });
 
 UserSchema.post('save', function (doc) {
-  console.log(`👤 Usuario ${doc._id} ${this.isNew ? 'creado' : 'actualizado'}`);
+  console.log(`Usuario ${doc._id} ${this.isNew ? 'creado' : 'actualizado'}`);
 });
 
 export const UserModel = model<UserDocument>('User', UserSchema);

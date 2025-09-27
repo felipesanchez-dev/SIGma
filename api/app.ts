@@ -24,12 +24,7 @@ export async function createAppInstance() {
 
 function validateEnvironment(): void {
   // Variables esenciales para el funcionamiento básico
-  const required = [
-    'MONGODB_URI',
-    'JWT_PRIVATE_KEY', 
-    'JWT_PUBLIC_KEY',
-    'AES_ENCRYPTION_KEY',
-  ];
+  const required = ['MONGODB_URI', 'JWT_PRIVATE_KEY', 'JWT_PUBLIC_KEY', 'AES_ENCRYPTION_KEY'];
 
   const missing = required.filter(key => !process.env[key]);
   if (missing.length > 0) {
