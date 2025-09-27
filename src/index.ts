@@ -104,8 +104,42 @@ async function createAppInstance() {
 
     const container = createContainer();
     appInstance = createServer(container);
+    await appInstance.ready();
   }
   return appInstance;
+}
+
+// Handler para Vercel
+export default async function handler(req: any, res: any) {
+  try {
+    const app = await createAppInstance();
+    
+    // Convertir la request de Vercel a formato Fastify
+    const fastifyRequest = {
+      method: req.method,
+      url: req.url,
+      headers: req.headers,
+      body: req.body,
+      query: req.query
+    };
+
+    // Usar inject de Fastify para procesar la request
+    const response = await app.inject(fastifyRequest);
+    
+    // Establecer el status code
+    res.status(response.statusCode);
+    
+    // Establecer headers
+    Object.entries(response.headers).forEach(([key, value]) => {
+      res.setHeader(key, value);
+    });
+    
+    // Enviar la respuesta
+    res.send(response.body);
+  } catch (error) {
+    console.error('Error en handler de Vercel:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 }
 
 // Solo ejecutar bootstrap si no estamos en Vercel
