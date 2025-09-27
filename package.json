@@ -4,7 +4,8 @@
   "description": "SIGma (Σ) - Sistema de Gestión SG-SST con Arquitectura Modular Escalable",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && tsc-alias",
+    "build": "echo 'No build needed for serverless API'",
+    "build:local": "tsc && tsc-alias",
     "start": "node dist/index.js",
     "start:vercel": "tsx api/index.ts",
     "dev": "tsx watch src/index.ts",

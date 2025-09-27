@@ -1,0 +1,12 @@
+{
+  "name": "SIGma Backend API",
+  "description": "Backend API para el sistema SIGma",
+  "version": "1.0.0",
+  "endpoints": {
+    "/api/auth/login": "POST - Iniciar sesión",
+    "/api/auth/register": "POST - Registrar usuario",
+    "/api/auth/refresh": "POST - Refrescar token",
+    "/api/auth/logout": "POST - Cerrar sesión",
+    "/api/auth/me": "GET - Información del usuario"
+  }
+}
