@@ -137,7 +137,9 @@ AES_ENCRYPTION_KEY=         # 32 caracteres
 
 ## 🚢 Despliegue en Render
 
-### Configuración del Servicio Web
+> 📖 **Guía Completa**: Lee [RENDER_SOLUTION.md](./RENDER_SOLUTION.md) para instrucciones detalladas paso a paso.
+
+### Configuración Rápida
 
 1. **Crear un nuevo Web Service** en [Render](https://render.com)
 2. **Conectar tu repositorio** de GitHub/GitLab
