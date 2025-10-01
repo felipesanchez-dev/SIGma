@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createServer } from './infrastructure/server/FastifyServer';
 import { MongoDatabase } from './infrastructure/database/MongoDatabase';
 import { createContainer } from './infrastructure/container/DIContainer';
@@ -25,11 +24,11 @@ async function bootstrap(): Promise<void> {
     setupGracefulShutdown(server, mongoDb);
 
     const port = parseInt(process.env.PORT || '3000', 10);
-    const host = process.env.HOST || '0.0.0.0';
+    const host = '0.0.0.0';
 
     await server.listen({ port, host });
 
-    console.log(`SIGma Backend ejecutándose en http://${host}:${port}`);
+    console.log(`🚀 Servidor corriendo en http://${host}:${port}`);
   } catch (error) {
     console.error('Error iniciando la aplicación:', error);
     process.exit(1);
@@ -92,66 +91,5 @@ function setupGracefulShutdown(server: any, mongoDb: MongoDatabase): void {
   });
 }
 
-// Crear instancia de servidor para exportar
-let appInstance: any = null;
-
-async function createAppInstance() {
-  if (!appInstance) {
-    validateEnvironment();
-
-    const mongoDb = MongoDatabase.getInstance();
-    await mongoDb.connect(process.env.MONGODB_URI!);
-    await mongoDb.createIndexes();
-
-    const container = createContainer();
-    appInstance = createServer(container);
-    await appInstance.ready();
-  }
-  return appInstance;
-}
-
-// Handler para Vercel
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  try {
-    // Prueba simple primero
-    if (req.url === '/health') {
-      return res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
-    }
-
-    const app = await createAppInstance();
-    
-    // Convertir la request de Vercel a formato Fastify
-    const fastifyRequest = {
-      method: req.method as any,
-      url: req.url || '/',
-      headers: req.headers,
-      body: req.body,
-      query: req.query
-    };
-
-    // Usar inject de Fastify para procesar la request
-    const response = await app.inject(fastifyRequest);
-    
-    // Establecer el status code
-    res.status(response.statusCode);
-    
-    // Establecer headers
-    Object.entries(response.headers).forEach(([key, value]) => {
-      if (value !== undefined) {
-        res.setHeader(key, String(value));
-      }
-    });
-    
-    // Enviar la respuesta
-    return res.send(response.body);
-  } catch (error) {
-    console.error('Error en handler de Vercel:', error);
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return res.status(500).json({ error: 'Internal server error', message });
-  }
-}
-
-// Solo ejecutar bootstrap si no estamos en Vercel
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
-  bootstrap();
-}
+// Iniciar la aplicación
+bootstrap();

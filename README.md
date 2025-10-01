@@ -135,6 +135,42 @@ AES_ENCRYPTION_KEY=         # 32 caracteres
 3. Mantener clave pública anterior por periodo de gracia
 4. Migrar gradualmente usuarios activos
 
+## 🚢 Despliegue en Render
+
+### Configuración del Servicio Web
+
+1. **Crear un nuevo Web Service** en [Render](https://render.com)
+2. **Conectar tu repositorio** de GitHub/GitLab
+3. **Configurar los comandos de build y start**:
+   - **Build Command**: `npm install && npm run build`
+   - **Start Command**: `npm start`
+
+### Variables de Entorno Requeridas
+
+Configura las siguientes variables de entorno en el dashboard de Render:
+
+```env
+NODE_ENV=production
+MONGODB_URI=tu_conexion_mongodb
+JWT_PRIVATE_KEY=tu_clave_privada_rsa
+JWT_PUBLIC_KEY=tu_clave_publica_rsa
+SMTP_HOST=tu_smtp_host
+SMTP_PORT=587
+SMTP_USER=tu_smtp_user
+SMTP_PASS=tu_smtp_password
+SMTP_FROM=noreply@tudominio.com
+AES_ENCRYPTION_KEY=tu_clave_aes_32_caracteres
+ARGON2_MEMORY_SIZE=65536
+ARGON2_TIME_COST=3
+ARGON2_PARALLELISM=1
+```
+
+### Notas Importantes
+
+- El puerto es asignado automáticamente por Render a través de la variable `PORT`
+- La aplicación escucha en `0.0.0.0` para aceptar conexiones externas
+- Asegúrate de que tu base de datos MongoDB sea accesible desde Render
+- Redis puede ser configurado usando el add-on de Redis de Render
 
 ## 👥 Equipo de Desarrollo
 
