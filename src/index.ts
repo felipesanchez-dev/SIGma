@@ -28,7 +28,7 @@ async function bootstrap(): Promise<void> {
 
     await server.listen({ port, host });
 
-    console.log(`🚀 Servidor corriendo en http://${host}:${port}`);
+    console.log(`Servidor corriendo en http://${host}:${port}`);
   } catch (error) {
     console.error('Error iniciando la aplicación:', error);
     process.exit(1);
